@@ -421,7 +421,7 @@ class Ui_MainWindow(object):
         self.plusminusButton.setText(_translate("MainWindow", "+/-"))
         self.outputLabel.setText(_translate("MainWindow", "0"))
 
-
+#a comment
 if __name__ == "__main__":
     import sys
 
