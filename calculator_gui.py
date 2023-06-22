@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         font.setPointSize(28)
         self.arrowButton.setFont(font)
         self.arrowButton.setObjectName("arrowButton")
-        self.percentButton = QtWidgets.QPushButton(self.centralwidget,clicked=lambda:self.pressed_it('%'))
+        self.percentButton = QtWidgets.QPushButton(self.centralwidget,clicked=lambda:self.percentage())
         self.percentButton.setGeometry(QtCore.QRect(110, 180, 75, 70))
         font = QtGui.QFont()
         font.setPointSize(28)
@@ -242,6 +242,25 @@ class Ui_MainWindow(object):
     def clear_output(self):
         self.outputLabel.setText('0')
 
+    def percentage(self):
+        screen = self.outputLabel.text()
+
+        if screen[0] == '-':
+            temp_screen = screen[1:]
+        else:
+            temp_screen = screen
+
+        operatorFound = False
+        for op in ('+', '-','*', '/'):
+            if op in temp_screen:
+                operatorFound = True
+                break
+        if operatorFound:
+            self.outputLabel.setText('ERROR')
+        else:
+            answer = eval(f'{screen}/100')
+            self.outputLabel.setText(str(answer))
+
     #remove a character
     def backspace(self):
         #store whats already on the screen
@@ -296,6 +315,7 @@ class Ui_MainWindow(object):
         for op in ('+', '-', '*', '/'):
             if op in x:
                 canInsertOperator = False
+                break
 
         if canInsertOperator:
             #checks in starts with 0 and if true replaces 0 with 'nothing'
