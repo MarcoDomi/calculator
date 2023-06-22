@@ -275,12 +275,12 @@ class Ui_MainWindow(object):
         operatorFound = False
 
         if eq[0] == '-':
-            x = eq[1:]
+            temp_eq = eq[1:]
         else:
-            x = eq
+            temp_eq = eq
 
         for op in ('+', '-', '*', '/'):
-            index = x.find(op)
+            index = temp_eq.find(op)
             if index != -1:
                 operatorFound = True
                 if eq[0] == '-':
@@ -307,13 +307,13 @@ class Ui_MainWindow(object):
         eq = self.outputLabel.text()
 
         if eq[0] == '-':
-            x = eq[1:]
+            temp_eq = eq[1:]
         else:
-            x = eq
+            temp_eq = eq
 
         canInsertOperator = True
         for op in ('+', '-', '*', '/'):
-            if op in x:
+            if op in temp_eq:
                 canInsertOperator = False
                 break
 
@@ -329,13 +329,13 @@ class Ui_MainWindow(object):
         screen = self.outputLabel.text()
 
         if screen[0] == '-':
-            x = screen[1:]
+            temp_screen = screen[1:]
         else:
-            x = screen
+            temp_screen = screen
 
         operatorFound = False
         for op in ('+', '*', '/', '-'):
-            if op in x:
+            if op in temp_screen:
                 operatorFound = True
                 break
 
@@ -365,7 +365,7 @@ class Ui_MainWindow(object):
                     if screen[0] == '-':
                         index += 2 #use to include the operator when splicing label text
                     else:
-                        index += 1 #adjust index by accounting for '-' at front of string that was left out
+                        index += 1 #adjust index to include the operator by accounting for '-' at front of string that was left out
                     break
 
             if index == -1:
